@@ -1,0 +1,10 @@
+title 0.5 New Note
+
+note over browser:
+browser executes the event handler for the submit button in spa.js - 
+the new note is added to the list of notes, and the browser rerenders
+to display the new note
+end note
+
+browser-->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+server-->browser: HTTP responds with status coded 201
