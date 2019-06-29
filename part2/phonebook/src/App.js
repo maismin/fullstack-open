@@ -100,7 +100,10 @@ const App = () => {
           setNewName('')
           setNewNumber('')
           handleNotification(`Added ${newPerson.name}`)
-        })  
+        })
+        .catch(error => {
+          handleError(error.response.data.error)
+        })
     }
   }
 
