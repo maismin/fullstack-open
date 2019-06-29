@@ -74,6 +74,8 @@ const App = () => {
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id !== existingPerson.id ? person : returnedPerson))
             setFilterPersons(filteredPersons.map(person => person.id !== existingPerson.id ? person : returnedPerson))
+            setNewName('')
+            setNewNumber('')
             handleNotification(`Updated ${existingPerson.name}'s number`)
           })
           .catch(error => {
