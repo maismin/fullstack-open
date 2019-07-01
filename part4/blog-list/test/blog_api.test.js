@@ -49,6 +49,22 @@ test('a valid blog can be added', async () => {
   expect(urls).toContain(newBlog.url)
 })
 
+test('a missing likes property defaults to 0', async () => {
+  const newBlog = {
+    title: 'Responsible JavaScript: Part II',
+    author: 'Jeremy Wagner',
+    url: 'https://alistapart.com/article/responsible-javascript-part-2/'
+  }
+
+  await api
+    .post('/api/blogs/')
+    .send(newBlog)
+
+  const blogsAtEnd = await helper.blogsInDB()
+  const returnedBlog = blogsAtEnd.filter(blog => blog.url === newBlog.url)[0]
+  expect(returnedBlog.likes).toBe(0)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

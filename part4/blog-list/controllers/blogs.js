@@ -1,5 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const _ = require('lodash')
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({})
@@ -8,6 +9,10 @@ blogsRouter.get('/', async (request, response) => {
 
 blogsRouter.post('/', async (request, response) => {
   const blog = new Blog(request.body)
+  if (!_.has(blog, 'likes')) {
+    blog.likes = 0
+  }
+
   const newBlog = await blog.save()
   response.status(201).json(newBlog.toJSON())
 })
