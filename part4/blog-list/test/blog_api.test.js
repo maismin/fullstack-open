@@ -5,13 +5,6 @@ const app = require('../app')
 const api = supertest(app)
 const Blog = require('../models/blog')
 
-
-
-
-
-
-
-
 describe('when there is initially some blogs saved', () => {
   beforeEach(async () => {
     await Blog.deleteMany({})
@@ -25,7 +18,7 @@ describe('when there is initially some blogs saved', () => {
 
   test('all blogs are returned', async () => {
     const response = await api.get('/api/blogs')
-    
+
     expect(response.body.length).toBe(helper.initialBlogs.length)
   })
 
@@ -90,7 +83,7 @@ describe('when there is initially some blogs saved', () => {
     test('succeeds with status code 204 if id is valid', async () => {
       const blogsAtStart = await helper.blogsInDB()
       const blogToDelete = blogsAtStart[0]
-      
+
       await api
         .delete(`/api/blogs/${blogToDelete.id}`)
         .expect(204)

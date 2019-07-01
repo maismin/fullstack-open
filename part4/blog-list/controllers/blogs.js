@@ -14,7 +14,7 @@ blogsRouter.post('/', async (request, response, next) => {
   try {
     const blog = new Blog(request.body)
     if (blog.title === undefined && blog.url === undefined) {
-       response.status(400).end()
+      response.status(400).end()
     } else {
       if (blog.likes === undefined) {
         blog.likes = 0
