@@ -1,20 +1,30 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
-const _ = require('lodash')
 
-blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({})
-  response.json(blogs.map(blog => blog.toJSON()))
+blogsRouter.get('/', async (request, response, next) => {
+  try {
+    const blogs = await Blog.find({})
+    response.json(blogs.map(blog => blog.toJSON()))
+  } catch(exception) {
+    next(exception)
+  }
 })
 
-blogsRouter.post('/', async (request, response) => {
-  const blog = new Blog(request.body)
-  if (!_.has(blog, 'likes')) {
-    blog.likes = 0
+blogsRouter.post('/', async (request, response, next) => {
+  try {
+    const blog = new Blog(request.body)
+    if (blog.title === undefined && blog.url === undefined) {
+       response.status(400).end()
+    } else {
+      if (blog.likes === undefined) {
+        blog.likes = 0
+      }
+      const newBlog = await blog.save()
+      response.status(201).json(newBlog.toJSON())
+    }
+  } catch(exception) {
+    next(exception)
   }
-
-  const newBlog = await blog.save()
-  response.status(201).json(newBlog.toJSON())
 })
 
 module.exports = blogsRouter
