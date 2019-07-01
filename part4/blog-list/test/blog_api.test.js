@@ -77,6 +77,25 @@ test('return 400 if blog does not have the title and url properties ', async () 
     .expect(400)
 })
 
+describe('deletion of a blog', () => {
+  test('succeeds with status code 204 if id is valid', async () => {
+    const blogsAtStart = await helper.blogsInDB()
+    const blogToDelete = blogsAtStart[0]
+    
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+
+    const blogsAtEnd = await helper.blogsInDB()
+
+    expect(blogsAtEnd.length).toBe(helper.initialBlogs.length - 1)
+
+    const urls = blogsAtEnd.map(blog => blog.url)
+
+    expect(urls).not.toContain(blogToDelete.url)
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
