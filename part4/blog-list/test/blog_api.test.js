@@ -97,6 +97,22 @@ describe('when there is initially some blogs saved', () => {
       expect(urls).not.toContain(blogToDelete.url)
     })
   })
+
+  describe('updating a blog', () => {
+    test('succeeds when updating the likes property', async () => {
+      const newLikes = 50
+      const blogsAtStart = await helper.blogsInDB()
+      const blogToUpdate = blogsAtStart[0]
+      blogToUpdate.likes = newLikes
+
+      const response = await api
+        .put(`/api/blogs/${blogToUpdate.id}`)
+        .send(blogToUpdate)
+
+      const updatedBlog = response.body
+      expect(updatedBlog.likes).toBe(newLikes)
+    })
+  })
 })
 
 afterAll(() => {
