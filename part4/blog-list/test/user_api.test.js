@@ -74,7 +74,7 @@ describe('when there is initially some users saved', () => {
       expect(usersAtEnd.length).toBe(helper.initialUsers.length)
     })
 
-    test.only('fails with proper status code when username length is less than minimum length', async () => {
+    test('fails with proper status code when username length is less than minimum length', async () => {
       const newUser = {
         username: 'ep',
         name: 'simon',
@@ -88,6 +88,24 @@ describe('when there is initially some users saved', () => {
         .expect('Content-Type', /application\/json/)
 
       expect(result.body.error).toContain('shorter than the minimum allowed length')
+
+      const usersAtEnd = await helper.usersInDB()
+      expect(usersAtEnd.length).toBe(helper.initialUsers.length)
+    })
+
+    test('fails with proper status code when password is missing', async () => {
+      const newUser = {
+        username: 'ephemeral',
+        name: 'simon'
+      }
+
+      const result = await api
+        .post('/api/users')
+        .send(newUser)
+        .expect(400)
+        .expect('Content-Type', /application\/json/)
+
+      expect(result.body.error).toContain('missing password')
 
       const usersAtEnd = await helper.usersInDB()
       expect(usersAtEnd.length).toBe(helper.initialUsers.length)
