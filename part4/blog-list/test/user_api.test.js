@@ -55,6 +55,24 @@ describe('when there is initially some users saved', () => {
       const usersAtEnd = await helper.usersInDB()
       expect(usersAtEnd.length).toBe(helper.initialUsers.length)
     })
+
+    test('fails with proper status code when username is missing', async () => {
+      const newUser = {
+        name: 'simon',
+        password: 'test'
+      }
+
+      const result = await api
+        .post('/api/users')
+        .send(newUser)
+        .expect(400)
+        .expect('Content-Type', /application\/json/)
+
+      expect(result.body.error).toContain('`username` is required')
+
+      const usersAtEnd = await helper.usersInDB()
+      expect(usersAtEnd.length).toBe(helper.initialUsers.length)
+    })
   })
 })
 
