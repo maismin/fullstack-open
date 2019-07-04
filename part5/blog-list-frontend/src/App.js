@@ -28,7 +28,7 @@ const App = () => {
       blogService.setToken(user.token)
       async function fetchBlogs() {
         const blogs = await blogService.getAll()
-        setBlogs(blogs)
+        sortBlogByLikes(blogs)
       }
       fetchBlogs()
     }
@@ -74,7 +74,7 @@ const App = () => {
     setBlogs([])
   }
 
-  const addBlog = (event) => {
+  const addBlog = async (event) => {
     event.preventDefault()
     const blogObject = {
       title,
@@ -82,14 +82,12 @@ const App = () => {
       url
     }
 
-    blogService.create(blogObject)
-      .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        handleNotification(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
-        setTitle('')
-        setAuthor('')
-        setUrl('')
-      })
+    const returnedBlog = await blogService.create(blogObject)
+    setBlogs(blogs.concat(returnedBlog))
+    handleNotification(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
+    setTitle('')
+    setAuthor('')
+    setUrl('')
   }
 
   const updateLikes = async (blog) => {
@@ -104,7 +102,11 @@ const App = () => {
 
     const updatedBlog = await blogService.update(blog.id, newBlog)
     const updatedBlogs = blogs.map(b => b.id === blog.id ? updatedBlog : b)
-    setBlogs(updatedBlogs)
+    sortBlogByLikes(updatedBlogs)
+  }
+
+  const sortBlogByLikes = (blogs) => {
+    setBlogs(blogs.sort((a,b) => b.likes - a.likes))
   }
 
   if (user === null) {
