@@ -109,6 +109,18 @@ const App = () => {
     setBlogs(blogs.sort((a,b) => b.likes - a.likes))
   }
 
+  const deleteBlog = async (blog) => {
+    try {
+      const result = window.confirm(`remove blog ${blog.title} by ${blog.author}`)
+      if (result) {
+        await blogService.remove(blog.id)
+        setBlogs(blogs.filter(b => b.id !== blog.id))
+      }
+    } catch(exception) {
+      handleError('Error: unauthorized user')
+    }
+  }
+
   if (user === null) {
     return (
       <div>
@@ -129,6 +141,7 @@ const App = () => {
     <div>
       <h2>Blogs</h2>      
       <Notification message={notification} classType='success'/>
+      <Notification message={error} classType='error' />
       <p>{user.name} logged in <button onClick={logout}>logout</button></p>
       <Togglable buttonLabel='new blog'>
         <BlogForm
@@ -141,7 +154,7 @@ const App = () => {
           handleBlog={addBlog}
         />
       </Togglable>
-      {blogs.map(blog => <Blog key={blog.id} blog={blog} handleLikes={updateLikes}/>)}
+      {blogs.map(blog => <Blog key={blog.id} blog={blog} handleLikes={updateLikes} handleDelete={blog.user.username === user.username ? deleteBlog : null}/>)}
     </div>
   );
 }

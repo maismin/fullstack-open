@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Blog = ({ blog, handleLikes }) => {
+const Blog = ({ blog, handleLikes,  handleDelete }) => {
   const [ showInfo, setShowInfo ] = useState(false)
   const displayInfo = { display: showInfo ? '' : 'none'}
   const toggleShowInfo = () => {
@@ -23,7 +23,8 @@ const Blog = ({ blog, handleLikes }) => {
       <div style={displayInfo}>
         <a href={blog.url} target='_blank' rel='noopener noreferrer'>{blog.url}</a> <br/>
         {blog.likes} likes <button onClick={() => handleLikes(blog)}>like</button> <br/>
-        added by {blog.user.name}
+        added by {blog.user.name} <br/>
+        {handleDelete && <button onClick={() => handleDelete(blog)}>remove</button>}
       </div>
     </div>
   )
