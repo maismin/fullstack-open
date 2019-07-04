@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
+import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import './App.css'
 
 
 const App = () => {
@@ -14,6 +16,8 @@ const App = () => {
   const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
   const [ user, setUser ] = useState(null)
+  const [ notification, setNotification ] = useState(null)
+  const [ error, setError ] = useState(null)
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -28,6 +32,20 @@ const App = () => {
       fetchBlogs()
     }
   }, [])
+
+  const handleNotification = (message) => {
+    setNotification(message)
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
+  }
+
+  const handleError = (message) => {
+    setError(message)
+    setTimeout(() => {
+      setError(null)
+    }, 5000)
+  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -45,7 +63,7 @@ const App = () => {
       const blogs = await blogService.getAll()
       setBlogs(blogs)
     } catch(exception) {
-      console.log(exception)
+      handleError('wrong username or password')
     }
   }
 
@@ -66,6 +84,7 @@ const App = () => {
     blogService.create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
+        handleNotification(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
         setTitle('')
         setAuthor('')
         setUrl('')
@@ -76,6 +95,7 @@ const App = () => {
     return (
       <div>
         <h2>Log in to application</h2>
+        <Notification message={error} classType='error' />
         <LoginForm
           username={username}
           password={password}
@@ -89,7 +109,8 @@ const App = () => {
 
   return (
     <div>
-      <h2>Blogs</h2>
+      <h2>Blogs</h2>      
+      <Notification message={notification} classType='success'/>
       <p>{user.name} logged in <button onClick={logout}>logout</button></p>
       <h2>Create New</h2>
       <BlogForm
