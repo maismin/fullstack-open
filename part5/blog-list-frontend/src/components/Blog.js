@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-const Blog = ({ blog }) => {
-  const [ showInfo, setShowInfo ] = useState(false)
 
+const Blog = ({ blog, handleLikes }) => {
+  const [ showInfo, setShowInfo ] = useState(false)
   const displayInfo = { display: showInfo ? '' : 'none'}
   const toggleShowInfo = () => {
     setShowInfo(!showInfo)
@@ -22,7 +22,7 @@ const Blog = ({ blog }) => {
       </div>
       <div style={displayInfo}>
         <a href={blog.url} target='_blank' rel='noopener noreferrer'>{blog.url}</a> <br/>
-        {blog.likes} likes <button>like</button> <br/>
+        {blog.likes} likes <button onClick={() => handleLikes(blog)}>like</button> <br/>
         added by {blog.user.name}
       </div>
     </div>
