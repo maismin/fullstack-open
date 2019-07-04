@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
@@ -22,14 +22,14 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    async function fetchBlogs() {
+      const blogs = await blogService.getAll()
+      sortBlogByLikes(blogs)
+    }
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
       blogService.setToken(user.token)
-      async function fetchBlogs() {
-        const blogs = await blogService.getAll()
-        sortBlogByLikes(blogs)
-      }
       fetchBlogs()
     }
   }, [])
@@ -139,7 +139,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>Blogs</h2>      
+      <h2>Blogs</h2>
       <Notification message={notification} classType='success'/>
       <Notification message={error} classType='error' />
       <p>{user.name} logged in <button onClick={logout}>logout</button></p>
@@ -156,7 +156,7 @@ const App = () => {
       </Togglable>
       {blogs.map(blog => <Blog key={blog.id} blog={blog} handleLikes={updateLikes} handleDelete={blog.user.username === user.username ? deleteBlog : null}/>)}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

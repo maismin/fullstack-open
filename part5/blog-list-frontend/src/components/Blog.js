@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Blog = ({ blog, handleLikes,  handleDelete }) => {
   const [ showInfo, setShowInfo ] = useState(false)
-  const displayInfo = { display: showInfo ? '' : 'none'}
+  const displayInfo = { display: showInfo ? '' : 'none' }
   const toggleShowInfo = () => {
     setShowInfo(!showInfo)
   }
