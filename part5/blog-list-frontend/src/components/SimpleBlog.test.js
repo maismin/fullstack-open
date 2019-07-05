@@ -1,21 +1,44 @@
 import React from 'react'
 import 'jest-dom/extend-expect'
-import { render, cleanup } from '@testing-library/react'
+import {
+  render,
+  fireEvent,
+  cleanup } from '@testing-library/react'
 import SimpleBlog from './SimpleBlog'
 
-afterEach(cleanup)
+describe('<SimpleBlog />', () => {
+  let blog
+  let mockHandler
 
-test('renders blog', () => {
-  const blog = {
-    title: 'this is the blog title',
-    author: 'John Doe',
-    likes: 14
-  }
+  beforeEach(() => {
+    mockHandler = jest.fn()
+    blog = {
+      title: 'this is the blog title',
+      author: 'John Doe',
+      likes: 14
+    }
+  })
 
-  const component = render(
-    <SimpleBlog blog={blog} onClick={null}/>
-  )
+  afterEach(cleanup)
 
-  expect(component.container).toHaveTextContent(`${blog.title} ${blog.author}`)
-  expect(component.container).toHaveTextContent(`blog has ${blog.likes} likes`)
+  test('renders blog', () => {
+    const component = render(
+      <SimpleBlog blog={blog} onClick={mockHandler}/>
+    )
+
+    expect(component.container).toHaveTextContent(`${blog.title} ${blog.author}`)
+    expect(component.container).toHaveTextContent(`blog has ${blog.likes} likes`)
+  })
+
+  test('when like button is pressed twice, the event handler passed as prop is called twice', () => {
+    const { getByText } = render(
+      <SimpleBlog blog={blog} onClick={mockHandler}/>
+    )
+
+    const button = getByText('like')
+    fireEvent.click(button)
+    fireEvent.click(button)
+
+    expect(mockHandler.mock.calls.length).toBe(2)
+  })
 })
