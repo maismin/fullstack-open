@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useField } from './hooks'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
@@ -11,11 +12,11 @@ import './App.css'
 
 const App = () => {
   const [ blogs, setBlogs ] = useState([])
-  const [ title, setTitle ] = useState('')
-  const [ author, setAuthor ] = useState('')
-  const [ url, setUrl ] = useState('')
-  const [ username, setUsername ] = useState('')
-  const [ password, setPassword ] = useState('')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
+  const username = useField('text')
+  const password = useField('text')
   const [ user, setUser ] = useState(null)
   const [ notification, setNotification ] = useState(null)
   const [ error, setError ] = useState(null)
@@ -52,15 +53,16 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-        username, password
+        username: username.value,
+        password: password.value
       })
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
       )
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      username.reset()
+      password.reset()
       const blogs = await blogService.getAll()
       setBlogs(blogs)
     } catch(exception) {
@@ -85,9 +87,9 @@ const App = () => {
     const returnedBlog = await blogService.create(blogObject)
     setBlogs(blogs.concat(returnedBlog))
     handleNotification(`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
-    setTitle('')
-    setAuthor('')
-    setUrl('')
+    title.reset()
+    author.reset()
+    url.reset()
   }
 
   const updateLikes = async (blog) => {
@@ -120,7 +122,6 @@ const App = () => {
       handleError('Error: unauthorized user')
     }
   }
-
   if (user === null) {
     return (
       <div>
@@ -129,8 +130,6 @@ const App = () => {
         <LoginForm
           username={username}
           password={password}
-          handleUsername={setUsername}
-          handlePassword={setPassword}
           handleLogin={handleLogin}
         />
       </div>
@@ -148,9 +147,6 @@ const App = () => {
           title={title}
           author={author}
           url={url}
-          handleTitle={setTitle}
-          handleAuthor={setAuthor}
-          handleUrl={setUrl}
           handleBlog={addBlog}
         />
       </Togglable>
