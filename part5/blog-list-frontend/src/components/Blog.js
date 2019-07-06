@@ -17,10 +17,10 @@ const Blog = ({ blog, handleLikes,  handleDelete }) => {
 
   return (
     <div style={blogStyle}>
-      <div onClick={toggleShowInfo}>
+      <div onClick={toggleShowInfo} className='defaultInfo'>
         {blog.title} {blog.author}
       </div>
-      <div style={displayInfo}>
+      <div style={displayInfo} className='moreInfo'>
         <a href={blog.url} target='_blank' rel='noopener noreferrer'>{blog.url}</a> <br/>
         {blog.likes} likes <button onClick={() => handleLikes(blog)}>like</button> <br/>
         added by {blog.user.name} <br/>
