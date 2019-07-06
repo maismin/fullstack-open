@@ -6,7 +6,7 @@ jest.mock('./services/blogs')
 import App from './App'
 
 describe('<App />', () => {
-  test('if no user logged, notes are not rendered', async () => {
+  test('if no user logged, blogs are not rendered', async () => {
     const component = render(
       <App />
     )
@@ -24,5 +24,26 @@ describe('<App />', () => {
     expect(usernameNode.value).toBe('')
     expect(passwordNode.value).toBe('')
     expect(component.queryByTestId('blog-list')).toBeNull()
+  })
+
+  test('if user logged, then blog posts are rendered', async () => {
+    const user = {
+      username: 'tester',
+      token: '1231231214',
+      name: 'Donald Tester'
+    }
+    localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
+
+    const component = render(
+      <App />
+    )
+    component.rerender(<App />)
+
+    const userLoggedIn = await waitForElement(() =>
+      component.getByText('Donald Tester', { exact: false })
+    )
+    const renderedBlogList = component.queryByTestId('blog-list')
+    expect(userLoggedIn).toBeDefined()
+    expect(renderedBlogList).toBeDefined()
   })
 })

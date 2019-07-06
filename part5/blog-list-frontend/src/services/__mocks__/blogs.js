@@ -1,3 +1,5 @@
+const setToken = jest.fn()
+
 const blogs = [
   {
     'title': 'Start Here: Learn HTML Basics',
@@ -101,4 +103,4 @@ const getAll = () => {
   return Promise.resolve(blogs)
 }
 
-export default { getAll }
+export default { getAll, setToken }
