@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const LoginForm = ({ username, password, handleUsername, handlePassword, handleLogin }) => (
-  <form onSubmit={handleLogin}>
+  <form onSubmit={handleLogin} data-testid="login-form">
     <div>
-      username
-      <input
+      <label htmlFor="username-input">username</label>
+      <input id="username-input"
         type="text"
         value={username}
         name="Username"
@@ -13,8 +13,8 @@ const LoginForm = ({ username, password, handleUsername, handlePassword, handleL
       />
     </div>
     <div>
-      password
-      <input
+      <label htmlFor="password">password</label>
+      <input id="password"
         type="password"
         value={password}
         name="Password"

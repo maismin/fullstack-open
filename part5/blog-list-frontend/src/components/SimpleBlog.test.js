@@ -1,9 +1,8 @@
 import React from 'react'
-import 'jest-dom/extend-expect'
 import {
   render,
-  fireEvent,
-  cleanup } from '@testing-library/react'
+  fireEvent
+} from '@testing-library/react'
 import SimpleBlog from './SimpleBlog'
 
 describe('<SimpleBlog />', () => {
@@ -18,8 +17,6 @@ describe('<SimpleBlog />', () => {
       likes: 14
     }
   })
-
-  afterEach(cleanup)
 
   test('renders blog', () => {
     const component = render(

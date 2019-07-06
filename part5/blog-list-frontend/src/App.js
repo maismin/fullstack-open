@@ -154,7 +154,16 @@ const App = () => {
           handleBlog={addBlog}
         />
       </Togglable>
-      {blogs.map(blog => <Blog key={blog.id} blog={blog} handleLikes={updateLikes} handleDelete={blog.user.username === user.username ? deleteBlog : null}/>)}
+      <div data-testid='blog-list'>
+        {blogs.map(blog =>
+          <Blog
+            key={blog.id}
+            blog={blog}
+            handleLikes={updateLikes}
+            handleDelete={blog.user.username === user.username ? deleteBlog : null}
+          />
+        )}
+      </div>
     </div>
   )
 }

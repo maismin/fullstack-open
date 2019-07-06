@@ -1,9 +1,8 @@
 import React from 'react'
-import 'jest-dom/extend-expect'
 import {
   render,
-  fireEvent,
-  cleanup } from '@testing-library/react'
+  fireEvent
+} from '@testing-library/react'
 import Blog from './Blog'
 
 describe('<Blog />', () => {
@@ -35,8 +34,6 @@ describe('<Blog />', () => {
       />
     )
   })
-
-  afterEach(cleanup)
 
   test('at start only the name and blog of blog post is shown', () => {
     const blogInfo = component.container.querySelector('.defaultInfo')
