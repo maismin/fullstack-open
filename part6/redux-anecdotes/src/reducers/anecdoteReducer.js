@@ -1,3 +1,5 @@
+import { cloneDeep } from 'lodash'
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -40,6 +42,9 @@ const reducer = (state = initialState, action) => {
       return state.map(anecdote =>
         anecdote.id !== id ? anecdote : changedAnecdote
       )
+    case 'SORT':
+      const newState = cloneDeep(state).sort((a,b) => b.votes - a.votes)
+      return newState
     default:
       return state
   }

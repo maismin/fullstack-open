@@ -21,6 +21,9 @@ const App = (props) => {
         id
       }
     })
+    store.dispatch({
+      type: 'SORT'
+    })
   }
 
   return (
