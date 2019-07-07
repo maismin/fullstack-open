@@ -7,7 +7,16 @@ export const createNotification = (notification) => {
   }
 }
 
-const reducer = (state ='test', action) => {
+export const clearNotification = () => {
+  return {
+    type: 'SET_NOTIFICATION',
+    data: {
+      notification: ''
+    }
+  }
+}
+
+const reducer = (state ='', action) => {
   switch(action.type) {
     case 'SET_NOTIFICATION':
       return action.data.notification
