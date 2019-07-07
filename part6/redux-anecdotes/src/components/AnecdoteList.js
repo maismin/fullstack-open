@@ -22,7 +22,7 @@ const AnecdoteList = (props) => {
     store.dispatch(createNotification(`you voted "${anecdote.content}"`))
     setTimeout(() => {
       store.dispatch(clearNotification())
-    }, 3000)
+    }, 5000)
   }
 
   return (
