@@ -17,10 +17,19 @@ const asObject = (anecdote) => {
   }
 }
 
+export const createAnecdote = (anecdote) => {
+  return {
+    type: 'NEW_ANECDOTE',
+    data: asObject(anecdote)
+  }
+}
+
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+    case 'NEW_ANECDOTE':
+      return [...state, action.data]
     case 'LIKE':
       const id = action.data.id
       const anecdoteToChange = state.find(a => a.id === id)
