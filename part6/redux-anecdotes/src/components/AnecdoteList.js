@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AnecdoteList = (props) => {
-  const anecdotes = props.store.getState()
+  const anecdotes = props.store.getState().anecdotes
   const store = props.store
 
   const vote = (id) => {
