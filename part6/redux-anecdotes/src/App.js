@@ -1,5 +1,6 @@
 import React from 'react'
 import Notification from './components/Notification'
+import Filter from './components/Filter'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
 
@@ -8,6 +9,7 @@ const App = (props) => {
   return (
     <div>
       <Notification store={store} />
+      <Filter store={store} />
       <AnecdoteList store={store} />
       <AnecdoteForm store={store} />
     </div>
