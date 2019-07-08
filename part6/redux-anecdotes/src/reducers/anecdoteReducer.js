@@ -26,6 +26,21 @@ export const createAnecdote = (anecdote) => {
   }
 }
 
+export const voteAnecdote = (id) => {
+  return {
+    type: 'LIKE',
+    data: {
+      id
+    }
+  }
+}
+
+export const sortAnecdotes = () => {
+  return {
+    type: 'SORT'
+  }
+}
+
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
