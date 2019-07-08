@@ -5,7 +5,6 @@ import {
   createNotification,
   clearNotification
 } from '../reducers/notificationReducer'
-import anecdoteService from '../services/anecdotes'
 
 const AnecdoteForm = (props) => {
   let formRef = React.createRef()
@@ -18,8 +17,7 @@ const AnecdoteForm = (props) => {
     setTimeout(() => {
       props.clearNotification()
     }, 5000)
-    const newAnecdote = await anecdoteService.createNew(content)
-    props.createAnecdote(newAnecdote)
+    props.createAnecdote(content)
   }
 
   return (
