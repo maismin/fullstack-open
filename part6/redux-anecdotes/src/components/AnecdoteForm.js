@@ -5,19 +5,21 @@ import {
   createNotification,
   clearNotification
 } from '../reducers/notificationReducer'
+import anecdoteService from '../services/anecdotes'
 
 const AnecdoteForm = (props) => {
   let formRef = React.createRef()
 
-  const addAnecdote = (event) => {
+  const addAnecdote = async (event) => {
     event.preventDefault()
-    const anecdote = event.target.anecdote.value
-    props.createAnecdote(anecdote)
-    props.createNotification(`'${anecdote}' added`)
+    const content = event.target.anecdote.value
+    props.createNotification(`'${content}' added`)
     formRef.reset()
     setTimeout(() => {
       props.clearNotification()
     }, 5000)
+    const newAnecdote = await anecdoteService.createNew(content)
+    props.createAnecdote(newAnecdote)
   }
 
   return (
