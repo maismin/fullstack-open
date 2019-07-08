@@ -1,5 +1,3 @@
-// modify the AnecdoteList so that it accesses the 
-// store's state with the help of the connect function
 import React from 'react'
 import { connect } from 'react-redux'
 import {
