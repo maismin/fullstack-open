@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  createNotification,
+  setNotification,
   clearNotification
 } from '../reducers/notificationReducer'
 import {
@@ -14,10 +14,7 @@ const AnecdoteList = (props) => {
     const anecdote = props.visibleAnecdotes.find(a => a.id === id)
     const newAnecdote = {...anecdote, votes: anecdote.votes + 1}
     props.voteAnecdote(newAnecdote.id, newAnecdote)
-    props.createNotification(`you voted "${anecdote.content}"`)
-    setTimeout(() => {
-      props.clearNotification()
-    }, 5000)
+    props.setNotification(`you voted "${anecdote.content}"`, 5000)
   }
 
   return (
@@ -52,7 +49,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  createNotification,
+  setNotification,
   clearNotification,
   voteAnecdote,
   sortAnecdotes
