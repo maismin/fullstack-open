@@ -10,10 +10,10 @@ import {
 } from '../reducers/anecdoteReducer'
 
 const AnecdoteList = (props) => {
-  const vote = (id) => {
+  const vote = async (id) => {
     const anecdote = props.visibleAnecdotes.find(a => a.id === id)
-    props.voteAnecdote(id)
-    props.sortAnecdotes()
+    const newAnecdote = {...anecdote, votes: anecdote.votes + 1}
+    props.voteAnecdote(newAnecdote.id, newAnecdote)
     props.createNotification(`you voted "${anecdote.content}"`)
     setTimeout(() => {
       props.clearNotification()
