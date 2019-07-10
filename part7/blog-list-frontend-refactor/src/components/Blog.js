@@ -17,6 +17,7 @@ const Blog = (props) => {
   const handleLike = async (blog) => {
     const newBlog = {...blog, likes: blog.likes +1}
     await props.likeBlog(newBlog.id, newBlog)
+    props.setMessage(`'${blog.title}' by ${blog.author} liked!`, 'success', 3000)
     props.sortBlogs()
   }
 
