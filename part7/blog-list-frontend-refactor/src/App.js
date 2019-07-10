@@ -11,13 +11,13 @@ import {
   clearBlogs
 } from './reducers/blogReducer'
 import {
-  initializeUser,
+  initializeLoginUser,
   logout
 } from './reducers/loginUserReducer'
 
 const App = (props) => {
   useEffect(() => {
-    props.initializeUser()
+    props.initializeLoginUser()
     props.initializeBlogs()
   }, [])
 
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   initializeBlogs,
   clearBlogs,
-  initializeUser,
+  initializeLoginUser,
   logout
 }
 

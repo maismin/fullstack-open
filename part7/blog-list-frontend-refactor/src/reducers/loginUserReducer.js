@@ -1,6 +1,6 @@
 import blogService from '../services/blogs'
 
-export const initializeUser = () => {
+export const initializeLoginUser = () => {
   const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
   let user = null
   if (loggedUserJSON) {
@@ -8,7 +8,7 @@ export const initializeUser = () => {
     blogService.setToken(user.token)
   }
   return {
-    type: 'INIT_USER',
+    type: 'INIT_LOGIN_USER',
     data: user
   }
 }
@@ -19,7 +19,7 @@ export const login = user => {
   )
   blogService.setToken(user.token)
   return ({
-    type: 'INIT_USER',
+    type: 'INIT_LOGIN_USER',
     data: user
   })
 }
@@ -34,7 +34,7 @@ export const logout = () => {
 
 const reducer = (state = null, action) => {
   switch(action.type) {
-    case 'INIT_USER':
+    case 'INIT_LOGIN_USER':
       return action.data
     case 'CLEAR_USER':
       return null
