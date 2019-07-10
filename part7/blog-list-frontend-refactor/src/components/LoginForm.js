@@ -1,26 +1,39 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { login } from '../reducers/userReducer'
+import { initializeBlogs } from '../reducers/blogReducer'
 
-const LoginForm = ({ username, password, handleLogin }) => {
+const LoginForm = (props) => {
+  const handleLogin = async event => {
+    event.preventDefault()
+    const username = event.target.username.value
+    const password = event.target.password.value
+    await props.login(username, password)
+    props.initializeBlogs()
+  }
+
   return (
-    <form onSubmit={handleLogin} data-testid="login-form">
+    <form onSubmit={handleLogin} 
+          data-testid="login-form">
       <div>
         <label htmlFor="username-input">username</label>
-        <input id="username-input" {...username} reset=""/>
+        <input id="username-input" name="username" />
       </div>
       <div>
         <label htmlFor="password">password</label>
-        <input id="password" {...password} reset=""/>
+        <input id="password" name="password" />
       </div>
       <button type="submit">login</button>
     </form>
   )
 }
 
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func,
-  username: PropTypes.object.isRequired,
-  password: PropTypes.object.isRequired
+const mapDispatchToProps = {
+  login,
+  initializeBlogs
 }
 
-export default LoginForm
+export default connect(
+  null,
+  mapDispatchToProps
+)(LoginForm)
