@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useField } from './hooks'
-import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
@@ -8,9 +7,13 @@ import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import './App.css'
+import { connect } from 'react-redux'
+import { initializeBlogs } from './reducers/blogReducer'
+import BlogList from './components/BlogList'
 
 
-const App = () => {
+const App = (props) => {
+  // console.log('props',props)
   const [ blogs, setBlogs ] = useState([])
   const title = useField('text')
   const author = useField('text')
@@ -33,6 +36,7 @@ const App = () => {
       blogService.setToken(user.token)
       fetchBlogs()
     }
+    props.initializeBlogs()
   }, [])
 
   const handleNotification = (message) => {
@@ -92,21 +96,6 @@ const App = () => {
     url.reset()
   }
 
-  const updateLikes = async (blog) => {
-    const newLike = blog.likes + 1
-    const newBlog = {
-      user: blog.user.id,
-      title: blog.title,
-      url: blog.url,
-      author: blog.author,
-      likes: newLike
-    }
-
-    const updatedBlog = await blogService.update(blog.id, newBlog)
-    const updatedBlogs = blogs.map(b => b.id === blog.id ? updatedBlog : b)
-    sortBlogByLikes(updatedBlogs)
-  }
-
   const sortBlogByLikes = (blogs) => {
     setBlogs(blogs.sort((a,b) => b.likes - a.likes))
   }
@@ -151,17 +140,11 @@ const App = () => {
         />
       </Togglable>
       <div data-testid='blog-list'>
-        {blogs.map(blog =>
-          <Blog
-            key={blog.id}
-            blog={blog}
-            handleLikes={updateLikes}
-            handleDelete={blog.user.username === user.username ? deleteBlog : null}
-          />
+        <BlogList />
         )}
       </div>
     </div>
   )
 }
 
-export default App
+export default connect(null, { initializeBlogs })(App)

@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { likeBlog } from '../reducers/blogReducer'
 
-const Blog = ({ blog, handleLikes,  handleDelete }) => {
+const Blog = (props) => {
   const [ showInfo, setShowInfo ] = useState(false)
   const displayInfo = { display: showInfo ? '' : 'none' }
   const toggleShowInfo = () => {
     setShowInfo(!showInfo)
+  }
+
+  const handleLike = (blog) => {
+    const newBlog = {...blog, likes: blog.likes +1}
+    props.likeBlog(newBlog.id, newBlog)
   }
 
   const blogStyle = {
@@ -15,19 +22,33 @@ const Blog = ({ blog, handleLikes,  handleDelete }) => {
     marginBottom: 5
   }
 
+  const handleDelete = () => {}
+
   return (
     <div style={blogStyle}>
       <div onClick={toggleShowInfo} className='defaultInfo'>
-        {blog.title} {blog.author}
+        {props.blog.title} {props.blog.author}
       </div>
       <div style={displayInfo} className='moreInfo'>
-        <a href={blog.url} target='_blank' rel='noopener noreferrer'>{blog.url}</a> <br/>
-        {blog.likes} likes <button onClick={() => handleLikes(blog)}>like</button> <br/>
-        added by {blog.user.name} <br/>
-        {handleDelete && <button onClick={() => handleDelete(blog)}>remove</button>}
+        <a href={props.blog.url} target='_blank' rel='noopener noreferrer'>{props.blog.url}</a> <br/>
+        {props.blog.likes} likes <button onClick={() => handleLike(props.blog)}>like</button> <br/>
+        added by {props.blog.user.name} <br/>
+        {handleDelete && <button onClick={() => handleDelete()}>remove</button>}
       </div>
     </div>
   )
 }
 
-export default Blog
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = {
+  likeBlog
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+) (Blog)
