@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { likeBlog } from '../reducers/blogReducer'
+import { likeBlog, sortBlogs } from '../reducers/blogReducer'
 
 const Blog = (props) => {
   const [ showInfo, setShowInfo ] = useState(false)
@@ -9,9 +9,10 @@ const Blog = (props) => {
     setShowInfo(!showInfo)
   }
 
-  const handleLike = (blog) => {
+  const handleLike = async (blog) => {
     const newBlog = {...blog, likes: blog.likes +1}
-    props.likeBlog(newBlog.id, newBlog)
+    await props.likeBlog(newBlog.id, newBlog)
+    props.sortBlogs()
   }
 
   const blogStyle = {
@@ -45,7 +46,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  likeBlog
+  likeBlog,
+  sortBlogs
 }
 
 export default connect(
