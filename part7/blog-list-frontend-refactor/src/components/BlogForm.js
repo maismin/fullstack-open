@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addBlog } from '../reducers/blogReducer'
+import { setMessage } from '../reducers/notificationReducer'
 
 const BlogForm = (props) => {
   let formRef = React.createRef()
@@ -12,6 +13,7 @@ const BlogForm = (props) => {
       url: event.target.url.value
     }
     props.addBlog(newBlog)
+    props.setMessage(`a new blog '${newBlog.title}' by ${newBlog.author} added`, 'success', 3000)
     formRef.reset()
   }
 
@@ -40,7 +42,8 @@ const BlogForm = (props) => {
 }
 
 const mapDispatchToProps = {
-  addBlog
+  addBlog,
+  setMessage
 }
 
 export default connect(
