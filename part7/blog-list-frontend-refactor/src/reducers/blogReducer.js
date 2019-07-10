@@ -43,6 +43,12 @@ export const deleteBlog = (blog) => {
   }
 }
 
+export const clearBlogs = () => {
+  return {
+    type: 'CLEAR_BLOGS'
+  }
+}
+
 const reducer = (state = [], action) => {
   switch(action.type) {
     case 'INIT_BLOGS':
@@ -57,6 +63,8 @@ const reducer = (state = [], action) => {
       return newState
     case 'DELETE_BLOG':
       return state.filter(blog => blog.id !== action.data.id)
+    case 'CLEAR_BLOGS':
+      return []
     default:
       return state
   }
