@@ -1,34 +1,49 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { addBlog } from '../reducers/blogReducer'
 
-const BlogForm = ({ title, author, url, handleBlog }) => (
-  <div>
-    <h2>Create New</h2>
-    <form onSubmit={handleBlog}>
-      <div>
-        title:
-        <input {...title} reset=""/>
-      </div>
+const BlogForm = (props) => {
+  let formRef = React.createRef()
+  const handleAddBlog = async event => {
+    event.preventDefault()
+    const newBlog = {
+      title: event.target.title.value,
+      author: event.target.author.value,
+      url: event.target.url.value
+    }
+    props.addBlog(newBlog)
+    formRef.reset()
+  }
 
-      <div>
-        author:
-        <input {...author} reset=""/>
-      </div>
+  return (
+    <div>
+      <h2>Create New</h2>
+      <form onSubmit={handleAddBlog} ref={(el) => formRef = el}>
+        <div>
+          title:
+          <input name="title"/>
+        </div>
 
-      <div>
-        url:
-        <input {...url} reset=""/>
-      </div>
-      <button type="submit">create</button>
-    </form>
-  </div>
-)
+        <div>
+          author:
+          <input name="author"/>
+        </div>
 
-BlogForm.propTypes = {
-  handleBlog: PropTypes.func.isRequired,
-  title: PropTypes.object.isRequired,
-  author: PropTypes.object.isRequired,
-  url: PropTypes.object.isRequired
+        <div>
+          url:
+          <input name="url"/>
+        </div>
+        <button type="submit">create</button>
+      </form>
+    </div>
+  )
 }
 
-export default BlogForm
+const mapDispatchToProps = {
+  addBlog
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(BlogForm)
