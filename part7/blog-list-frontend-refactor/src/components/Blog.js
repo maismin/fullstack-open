@@ -5,6 +5,7 @@ import {
   sortBlogs,
   deleteBlog
 } from '../reducers/blogReducer'
+import { setMessage } from '../reducers/notificationReducer'
 
 const Blog = (props) => {
   const [ showInfo, setShowInfo ] = useState(false)
@@ -24,6 +25,7 @@ const Blog = (props) => {
       const result = window.confirm(`remove blog '${blog.title}' by ${blog.author}?`)
       if (result) {
         props.deleteBlog(blog)
+        props.setMessage(`'${blog.title}' by ${blog.author} deleted`, 'success', 3000)
       }
     } catch(exception) {
       console.log(exception)
@@ -65,7 +67,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   likeBlog,
   sortBlogs,
-  deleteBlog
+  deleteBlog,
+  setMessage
 }
 
 export default connect(
