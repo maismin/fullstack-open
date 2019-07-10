@@ -29,10 +29,21 @@ export const sortBlogs = () => {
   }
 }
 
+export const addBlog = (newBlog) => {
+  return async dispatch => {
+    const returnedBlog = await blogService.create(newBlog)
+
+    dispatch({
+      type: 'ADD_BLOG',
+      data: returnedBlog
+    })
+  }
+}
+
 export const deleteBlog = (blog) => {
   return async dispatch => {
     const response = await blogService.remove(blog.id)
-    console.log(response)
+
     if (response.status === 204) {
       dispatch({
         type: 'DELETE_BLOG',
@@ -61,6 +72,8 @@ const reducer = (state = [], action) => {
     case 'SORT':
       const newState = cloneDeep(state).sort((a,b) => b.likes - a.likes)
       return newState
+    case 'ADD_BLOG':
+      return [...state, action.data]
     case 'DELETE_BLOG':
       return state.filter(blog => blog.id !== action.data.id)
     case 'CLEAR_BLOGS':
