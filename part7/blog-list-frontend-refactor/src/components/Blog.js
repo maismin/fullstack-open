@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { likeBlog, sortBlogs } from '../reducers/blogReducer'
+import {
+  likeBlog,
+  sortBlogs,
+  deleteBlog
+} from '../reducers/blogReducer'
 
 const Blog = (props) => {
   const [ showInfo, setShowInfo ] = useState(false)
@@ -15,6 +19,17 @@ const Blog = (props) => {
     props.sortBlogs()
   }
 
+  const handleDelete = (blog) => {
+    try {
+      const result = window.confirm(`remove blog '${blog.title}' by ${blog.author}?`)
+      if (result) {
+        props.deleteBlog(blog)
+      }
+    } catch(exception) {
+      console.log(exception)
+    }
+  }
+
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -23,7 +38,6 @@ const Blog = (props) => {
     marginBottom: 5
   }
 
-  const handleDelete = () => {}
   return (
     <div style={blogStyle}>
       <div onClick={toggleShowInfo} className='defaultInfo'>
@@ -35,7 +49,7 @@ const Blog = (props) => {
         added by {props.blog.user.name} <br/>
         {
           props.user.username === props.blog.user.username &&
-          <button onClick={() => handleDelete()}>remove</button>
+          <button onClick={() => handleDelete(props.blog)}>remove</button>
         }
       </div>
     </div>
@@ -50,7 +64,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   likeBlog,
-  sortBlogs
+  sortBlogs,
+  deleteBlog
 }
 
 export default connect(
