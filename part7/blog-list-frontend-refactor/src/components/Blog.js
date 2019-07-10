@@ -24,7 +24,6 @@ const Blog = (props) => {
   }
 
   const handleDelete = () => {}
-
   return (
     <div style={blogStyle}>
       <div onClick={toggleShowInfo} className='defaultInfo'>
@@ -34,7 +33,10 @@ const Blog = (props) => {
         <a href={props.blog.url} target='_blank' rel='noopener noreferrer'>{props.blog.url}</a> <br/>
         {props.blog.likes} likes <button onClick={() => handleLike(props.blog)}>like</button> <br/>
         added by {props.blog.user.name} <br/>
-        {handleDelete && <button onClick={() => handleDelete()}>remove</button>}
+        {
+          props.user.username === props.blog.user.username &&
+          <button onClick={() => handleDelete()}>remove</button>
+        }
       </div>
     </div>
   )
@@ -42,6 +44,7 @@ const Blog = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user
   }
 }
 
