@@ -61,13 +61,14 @@ blogsRouter.post('/', async (request, response, next) => {
 
 blogsRouter.put('/:id', async (request, response, next) => {
   const body = request.body
+  const user = await User.findById(body.user.id)
 
   const blog = {
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes,
-    user: body.user
+    user: user._id
   }
 
   try {
