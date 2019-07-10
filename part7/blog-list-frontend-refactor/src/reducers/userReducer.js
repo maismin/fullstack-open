@@ -14,6 +14,34 @@ export const initializeUser = () => {
   }
 }
 
+export const login = (username, password) => {
+  return async dispatch => {
+    try {
+      const user = await loginService.login({
+        username,
+        password
+      })
+      window.localStorage.setItem(
+        'loggedBlogappUser', JSON.stringify(user)
+      )
+      blogService.setToken(user.token)
+      dispatch({
+        type: 'INIT_USER',
+        data: user
+      })
+    } catch(exception) {
+      console.log('wrong username or password')
+    }
+  }
+}
+
+export const logout = () => {
+  window.localStorage.clear()
+  return {
+    type: 'CLEAR_USER'
+  }
+}
+
 
 const reducer = (state = null, action) => {
   switch(action.type) {
