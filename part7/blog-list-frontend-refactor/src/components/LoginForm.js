@@ -2,14 +2,24 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../reducers/userReducer'
 import { initializeBlogs } from '../reducers/blogReducer'
+import { setMessage } from '../reducers/notificationReducer'
+import loginService from '../services/login'
 
 const LoginForm = (props) => {
   const handleLogin = async event => {
     event.preventDefault()
     const username = event.target.username.value
     const password = event.target.password.value
-    await props.login(username, password)
-    props.initializeBlogs()
+    try {
+      const user = await loginService.login({
+        username,
+        password
+      })
+      props.login(user)
+      props.initializeBlogs()
+    } catch(exception) {
+      props.setMessage('wrong username or password', 'error', 3000)
+    }
   }
 
   return (
@@ -30,7 +40,8 @@ const LoginForm = (props) => {
 
 const mapDispatchToProps = {
   login,
-  initializeBlogs
+  initializeBlogs,
+  setMessage
 }
 
 export default connect(

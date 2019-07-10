@@ -1,4 +1,3 @@
-import loginService from '../services/login'
 import blogService from '../services/blogs'
 
 export const initializeUser = () => {
@@ -14,25 +13,15 @@ export const initializeUser = () => {
   }
 }
 
-export const login = (username, password) => {
-  return async dispatch => {
-    try {
-      const user = await loginService.login({
-        username,
-        password
-      })
-      window.localStorage.setItem(
-        'loggedBlogappUser', JSON.stringify(user)
-      )
-      blogService.setToken(user.token)
-      dispatch({
-        type: 'INIT_USER',
-        data: user
-      })
-    } catch(exception) {
-      console.log('wrong username or password')
-    }
-  }
+export const login = user => {
+  window.localStorage.setItem(
+    'loggedBlogappUser', JSON.stringify(user)
+  )
+  blogService.setToken(user.token)
+  return ({
+    type: 'INIT_USER',
+    data: user
+  })
 }
 
 export const logout = () => {
