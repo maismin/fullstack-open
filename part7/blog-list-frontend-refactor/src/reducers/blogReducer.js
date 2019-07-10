@@ -8,6 +8,7 @@ export const initializeBlogs = () => {
       type: 'INIT_BLOGS',
       data: blogs
     })
+    dispatch(sortBlogs())
   }
 }
 
