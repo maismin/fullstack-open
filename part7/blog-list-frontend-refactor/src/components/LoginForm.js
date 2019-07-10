@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { login } from '../reducers/userReducer'
+import { login } from '../reducers/loginUserReducer'
 import { initializeBlogs } from '../reducers/blogReducer'
 import { setMessage } from '../reducers/notificationReducer'
 import loginService from '../services/login'

@@ -51,7 +51,7 @@ const Blog = (props) => {
         {props.blog.likes} likes <button onClick={() => handleLike(props.blog)}>like</button> <br/>
         added by {props.blog.user.name} <br/>
         {
-          props.user.username === props.blog.user.username &&
+          props.loginUser.username === props.blog.user.username &&
           <button onClick={() => handleDelete(props.blog)}>remove</button>
         }
       </div>
@@ -61,7 +61,7 @@ const Blog = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    loginUser: state.loginUser
   }
 }
 

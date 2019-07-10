@@ -13,7 +13,7 @@ import {
 import {
   initializeUser,
   logout
-} from './reducers/userReducer'
+} from './reducers/loginUserReducer'
 
 const App = (props) => {
   useEffect(() => {
@@ -26,7 +26,7 @@ const App = (props) => {
     props.clearBlogs()
   }
 
-  if (props.user === null) {
+  if (props.loginUser === null) {
     return (
       <div>
         <h2>Log in to application</h2>
@@ -40,7 +40,7 @@ const App = (props) => {
     <div>
       <h2>Blogs</h2>
       <Notification />
-      <p>{props.user.name} logged in <button onClick={logout}>logout</button></p>
+      <p>{props.loginUser.name} logged in <button onClick={logout}>logout</button></p>
       <Togglable buttonLabel='new blog'>
         <BlogForm />
       </Togglable>
@@ -53,7 +53,7 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    loginUser: state.loginUser
   }
 }
 
