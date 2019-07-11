@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  Link, Route, Redirect
+  Link
 } from 'react-router-dom'
 
 const UserList = props => {
@@ -22,9 +22,6 @@ const UserList = props => {
           ))}
         </tbody>
       </table>
-      <Route path='/users/:id' render={({ match }) => 
-        <Redirect to={`/users/${match.params.id}`}/>
-      } />
     </div>
   )
 }

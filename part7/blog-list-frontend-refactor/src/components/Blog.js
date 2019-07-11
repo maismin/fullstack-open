@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import {
   likeBlog,
@@ -8,11 +8,10 @@ import {
 import { setMessage } from '../reducers/notificationReducer'
 
 const Blog = (props) => {
-  const [ showInfo, setShowInfo ] = useState(false)
-  const displayInfo = { display: showInfo ? '' : 'none' }
-  const toggleShowInfo = () => {
-    setShowInfo(!showInfo)
+  if (props.blogs.length === 0) {
+    return null
   }
+  const blog = props.blogs.find(blog => blog.id === props.id)
 
   const handleLike = async (blog) => {
     const newBlog = {...blog, likes: blog.likes +1}
@@ -32,27 +31,17 @@ const Blog = (props) => {
       console.log(exception)
     }
   }
-
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
-
+  
   return (
-    <div style={blogStyle}>
-      <div onClick={toggleShowInfo} className='defaultInfo'>
-        {props.blog.title} {props.blog.author}
-      </div>
-      <div style={displayInfo} className='moreInfo'>
-        <a href={props.blog.url} target='_blank' rel='noopener noreferrer'>{props.blog.url}</a> <br/>
-        {props.blog.likes} likes <button onClick={() => handleLike(props.blog)}>like</button> <br/>
-        added by {props.blog.user.name} <br/>
+    <div className="blogStyle">
+      <div>
+        {blog.title} {blog.author} <br/>
+        <a href={blog.url} target='_blank' rel='noopener noreferrer'>{blog.url}</a> <br/>
+        {blog.likes} likes <button onClick={() => handleLike(blog)}>like</button> <br/>
+        added by {blog.user.name} <br/>
         {
-          props.loginUser.username === props.blog.user.username &&
-          <button onClick={() => handleDelete(props.blog)}>remove</button>
+          props.loginUser.username === blog.user.username &&
+          <button onClick={() => handleDelete(blog)}>remove</button>
         }
       </div>
     </div>
@@ -61,7 +50,8 @@ const Blog = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loginUser: state.loginUser
+    loginUser: state.loginUser,
+    blogs: state.blogs
   }
 }
 

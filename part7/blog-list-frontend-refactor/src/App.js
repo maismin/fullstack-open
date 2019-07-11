@@ -3,6 +3,7 @@ import BlogForm from './components/BlogForm'
 import BlogList from './components/BlogList'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
+import BlogRouter from './components/BlogRouter'
 import UserRouter from './components/UserRouter'
 import Notification from './components/Notification'
 import './App.css'
@@ -57,6 +58,7 @@ const App = (props) => {
         <BlogForm />
       </Togglable>
       <Route exact path='/' render={() => <BlogList />} />
+      <Route path='/blogs' render={() => <BlogRouter />} />
       <Route path='/users' render={() => <UserRouter />} />
     </div>
   )
