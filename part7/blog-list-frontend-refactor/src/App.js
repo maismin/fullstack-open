@@ -14,10 +14,14 @@ import {
   initializeLoginUser,
   logout
 } from './reducers/loginUserReducer'
+import {
+  initializeUsers
+} from './reducers/userReducer'
 
 const App = (props) => {
   useEffect(() => {
     props.initializeLoginUser()
+    props.initializeUsers()
     props.initializeBlogs()
   }, [])
 
@@ -61,7 +65,8 @@ const mapDispatchToProps = {
   initializeBlogs,
   clearBlogs,
   initializeLoginUser,
-  logout
+  logout,
+  initializeUsers
 }
 
 export default connect(
