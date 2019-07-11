@@ -31,11 +31,11 @@ const Blog = (props) => {
       console.log(exception)
     }
   }
-  
+
   return (
-    <div className="blogStyle">
+    <div>
       <div>
-        {blog.title} {blog.author} <br/>
+        <h3>{blog.title} {blog.author}</h3>
         <a href={blog.url} target='_blank' rel='noopener noreferrer'>{blog.url}</a> <br/>
         {blog.likes} likes <button onClick={() => handleLike(blog)}>like</button> <br/>
         added by {blog.user.name} <br/>
