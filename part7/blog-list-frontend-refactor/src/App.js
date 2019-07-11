@@ -3,6 +3,7 @@ import BlogForm from './components/BlogForm'
 import BlogList from './components/BlogList'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
+import UserRouter from './components/UserRouter'
 import Notification from './components/Notification'
 import './App.css'
 import { connect } from 'react-redux'
@@ -17,6 +18,9 @@ import {
 import {
   initializeUsers
 } from './reducers/userReducer'
+import {
+  Route
+} from 'react-router-dom'
 
 const App = (props) => {
   useEffect(() => {
@@ -28,6 +32,10 @@ const App = (props) => {
   const logout = () => {
     props.logout()
     props.clearBlogs()
+  }
+
+  const userById = id => {
+    return props.users.find(user => user.id === id)
   }
 
   if (props.loginUser === null) {
@@ -48,16 +56,16 @@ const App = (props) => {
       <Togglable buttonLabel='new blog'>
         <BlogForm />
       </Togglable>
-      <div data-testid='blog-list'>
-        <BlogList />
-      </div>
+      <Route exact path='/' render={() => <BlogList />} />
+      <Route path='/users' render={() => <UserRouter />} />
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    loginUser: state.loginUser
+    loginUser: state.loginUser,
+    users: state.users
   }
 }
 
