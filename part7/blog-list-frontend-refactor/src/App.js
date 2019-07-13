@@ -23,6 +23,9 @@ import {
 import {
   Route
 } from 'react-router-dom'
+import {
+  Container
+} from 'semantic-ui-react'
 
 const App = (props) => {
   useEffect(() => {
@@ -41,7 +44,7 @@ const App = (props) => {
   }
 
   return (
-    <div>
+    <Container>
       <NavBar />
       <h2>Blog App</h2>
       <Notification />
@@ -51,7 +54,7 @@ const App = (props) => {
       <Route exact path='/' render={() => <BlogList />} />
       <Route path='/blogs' render={() => <BlogRouter />} />
       <Route path='/users' render={() => <UserRouter />} />
-    </div>
+    </Container>
   )
 }
 
