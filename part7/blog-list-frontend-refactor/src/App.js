@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import BlogForm from './components/BlogForm'
 import BlogList from './components/BlogList'
-import LoginForm from './components/LoginForm'
-import Togglable from './components/Togglable'
 import BlogRouter from './components/BlogRouter'
-import UserRouter from './components/UserRouter'
+import LoginForm from './components/LoginForm'
+import NavBar from './components/NavBar'
 import Notification from './components/Notification'
+import Togglable from './components/Togglable'
+import UserRouter from './components/UserRouter'
 import './App.css'
 import { connect } from 'react-redux'
 import {
@@ -30,11 +31,6 @@ const App = (props) => {
     props.initializeBlogs()
   }, [])
 
-  const logout = () => {
-    props.logout()
-    props.clearBlogs()
-  }
-
   if (props.loginUser === null) {
     return (
       <div>
@@ -46,9 +42,9 @@ const App = (props) => {
 
   return (
     <div>
-      <h2>Blogs</h2>
+      <NavBar />
+      <h2>Blog App</h2>
       <Notification />
-      <p>{props.loginUser.name} logged in <button onClick={logout}>logout</button></p>
       <Togglable buttonLabel='new blog'>
         <BlogForm />
       </Togglable>
