@@ -5,6 +5,7 @@ import { setMessage } from '../reducers/notificationReducer'
 import { useField } from '../hooks'
 import {
   Button,
+  Divider,
   Form,
   Header
 } from 'semantic-ui-react'
@@ -30,6 +31,7 @@ const BlogForm = (props) => {
 
   return (
     <div>
+      <Divider horizontal></Divider>
       <Header as='h2'>Create New</Header>
       <Form onSubmit={handleAddBlog}>
         <Form.Input fluid placeholder='Title' name='title' {...title} reset=''/>
@@ -38,6 +40,7 @@ const BlogForm = (props) => {
 
         <Button type="submit">Create</Button>
       </Form>
+      <Divider horizontal></Divider>
     </div>
   )
 }
