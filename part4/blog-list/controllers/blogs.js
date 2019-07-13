@@ -44,7 +44,8 @@ blogsRouter.post('/', async (request, response, next) => {
       author: body.author,
       url: body.url,
       likes: body.likes,
-      user: user._id
+      user: user._id,
+      comments: body.comments
     })
 
     if (blog.title === undefined && blog.url === undefined) {
@@ -79,7 +80,8 @@ blogsRouter.put('/:id', async (request, response, next) => {
     author: body.author,
     url: body.url,
     likes: body.likes,
-    user: user._id
+    user: user._id,
+    comments: body.comments
   }
 
   try {
@@ -87,6 +89,17 @@ blogsRouter.put('/:id', async (request, response, next) => {
       .findByIdAndUpdate(request.params.id, blog, { new: true })
       .populate('user', { username: 1, name: 1 })
     response.json(updatedBlog.toJSON())
+  } catch(exception) {
+    next(exception)
+  }
+})
+
+blogsRouter.post('/:id/comments', async (request, response, next) => {
+  try {
+    const comment = request.body.comment
+    const updateComment = { $push: { comments: comment }}
+    await Blog.findByIdAndUpdate(request.params.id, updateComment)
+    response.status(201).json({ comment: comment})
   } catch(exception) {
     next(exception)
   }
