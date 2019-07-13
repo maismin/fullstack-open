@@ -35,14 +35,9 @@ const App = (props) => {
     props.clearBlogs()
   }
 
-  const userById = id => {
-    return props.users.find(user => user.id === id)
-  }
-
   if (props.loginUser === null) {
     return (
       <div>
-        <h2>Log in to application</h2>
         <Notification />
         <LoginForm />
       </div>
@@ -66,8 +61,7 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loginUser: state.loginUser,
-    users: state.users
+    loginUser: state.loginUser
   }
 }
 
