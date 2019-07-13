@@ -6,8 +6,9 @@ import {
   deleteBlog
 } from '../reducers/blogReducer'
 import { setMessage } from '../reducers/notificationReducer'
+import { withRouter } from 'react-router-dom'
 
-const Blog = (props) => {
+const BlogWithNoHistory = (props) => {
   if (props.blogs.length === 0) {
     return null
   }
@@ -26,6 +27,7 @@ const Blog = (props) => {
       if (result) {
         props.deleteBlog(blog)
         props.setMessage(`'${blog.title}' by ${blog.author} deleted`, 'success', 3000)
+        props.history.push('/')
       }
     } catch(exception) {
       console.log(exception)
@@ -47,6 +49,8 @@ const Blog = (props) => {
     </div>
   )
 }
+
+const Blog = withRouter(BlogWithNoHistory) 
 
 const mapStateToProps = (state) => {
   return {
