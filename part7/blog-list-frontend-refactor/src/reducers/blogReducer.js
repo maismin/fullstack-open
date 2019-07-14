@@ -60,6 +60,20 @@ export const clearBlogs = () => {
   }
 }
 
+export const addComment = (blog, comment) => {
+  return async dispatch => {
+    const response = await blogService.createComment(blog.id, comment)
+    if (response.status === 201) {
+      const blogWithNewComment = {...blog}
+      blogWithNewComment.comments.push(response.data.comment)
+      dispatch({
+        type: 'ADD_COMMENT',
+        data: blogWithNewComment
+      })
+    }
+  }
+}
+
 const reducer = (state = [], action) => {
   switch(action.type) {
     case 'INIT_BLOGS':
@@ -74,6 +88,10 @@ const reducer = (state = [], action) => {
       return newState
     case 'ADD_BLOG':
       return [...state, action.data]
+    case 'ADD_COMMENT':
+      return state.map(blog =>
+        blog.id !== action.data.id ? blog : action.data
+      )
     case 'DELETE_BLOG':
       return state.filter(blog => blog.id !== action.data.id)
     case 'CLEAR_BLOGS':

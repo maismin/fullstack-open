@@ -3,10 +3,18 @@ import { connect } from 'react-redux'
 import {
   likeBlog,
   sortBlogs,
-  deleteBlog
+  deleteBlog,
+  addComment
 } from '../reducers/blogReducer'
 import { setMessage } from '../reducers/notificationReducer'
 import { withRouter } from 'react-router-dom'
+import {
+  Button,
+  Comment,
+  Form,
+  Header,
+  Segment
+} from 'semantic-ui-react'
 
 const BlogWithNoHistory = (props) => {
   if (props.blogs.length === 0) {
@@ -34,18 +42,47 @@ const BlogWithNoHistory = (props) => {
     }
   }
 
+  const handleComment = (event) => {
+    event.preventDefault()
+    props.addComment(blog, event.target.comment.value)
+    event.target.reset()
+  }
+
   return (
     <div>
-      <div>
-        <h3>{blog.title} {blog.author}</h3>
+      <Segment>
+        <Header as='h3'>{blog.title} {blog.author}</Header>
         <a href={blog.url} target='_blank' rel='noopener noreferrer'>{blog.url}</a> <br/>
-        {blog.likes} likes <button onClick={() => handleLike(blog)}>like</button> <br/>
+        {blog.likes} likes <Button color='blue' icon='thumbs up outline' onClick={() => handleLike(blog)}></Button> <br/>
         added by {blog.user.name} <br/>
         {
           props.loginUser.username === blog.user.username &&
-          <button onClick={() => handleDelete(blog)}>remove</button>
+          <Button onClick={() => handleDelete(blog)}>remove</Button>
         }
-      </div>
+      </Segment>
+      <Segment>
+        <Comment.Group>
+          <Header as='h3' dividing>
+            Comments
+          </Header>
+        </Comment.Group>
+        {
+          blog.comments.map((comment, idx) => (
+            <Comment key={idx}>
+              <Comment.Content>
+                <Comment.Author>Anonymous</Comment.Author>
+                <Comment.Text>
+                  {comment}
+                </Comment.Text>
+              </Comment.Content>
+            </Comment>
+          ))
+        }
+      <Form reply onSubmit={handleComment}>
+        <Form.TextArea name='comment'/>
+        <Button content='Add Comment' labelPosition='left' icon='edit' primary type='submit'/>
+      </Form>
+      </Segment>
     </div>
   )
 }
@@ -63,7 +100,8 @@ const mapDispatchToProps = {
   likeBlog,
   sortBlogs,
   deleteBlog,
-  setMessage
+  setMessage,
+  addComment
 }
 
 export default connect(
