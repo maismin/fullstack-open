@@ -23,7 +23,7 @@ const BlogWithNoHistory = (props) => {
   const blog = props.blogs.find(blog => blog.id === props.id)
 
   const handleLike = async (blog) => {
-    const newBlog = {...blog, likes: blog.likes +1}
+    const newBlog = { ...blog, likes: blog.likes +1 }
     await props.likeBlog(newBlog.id, newBlog)
     props.setMessage(`'${blog.title}' by ${blog.author} liked!`, 'success', 3000)
     props.sortBlogs()
@@ -78,16 +78,16 @@ const BlogWithNoHistory = (props) => {
             </Comment>
           ))
         }
-      <Form reply onSubmit={handleComment}>
-        <Form.TextArea name='comment'/>
-        <Button content='Add Comment' labelPosition='left' icon='edit' primary type='submit'/>
-      </Form>
+        <Form reply onSubmit={handleComment}>
+          <Form.TextArea name='comment'/>
+          <Button content='Add Comment' labelPosition='left' icon='edit' primary type='submit'/>
+        </Form>
       </Segment>
     </div>
   )
 }
 
-const Blog = withRouter(BlogWithNoHistory) 
+const Blog = withRouter(BlogWithNoHistory)
 
 const mapStateToProps = (state) => {
   return {

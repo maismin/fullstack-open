@@ -64,7 +64,7 @@ export const addComment = (blog, comment) => {
   return async dispatch => {
     const response = await blogService.createComment(blog.id, comment)
     if (response.status === 201) {
-      const blogWithNewComment = {...blog}
+      const blogWithNewComment = { ...blog }
       blogWithNewComment.comments.push(response.data.comment)
       dispatch({
         type: 'ADD_COMMENT',
@@ -76,28 +76,26 @@ export const addComment = (blog, comment) => {
 
 const reducer = (state = [], action) => {
   switch(action.type) {
-    case 'INIT_BLOGS':
-      return action.data
-    case 'LIKE':
-      const updatedBlog = action.data
-      return state.map(blog => 
-        blog.id !== action.data.id ? blog : updatedBlog
-      )
-    case 'SORT':
-      const newState = cloneDeep(state).sort((a,b) => b.likes - a.likes)
-      return newState
-    case 'ADD_BLOG':
-      return [...state, action.data]
-    case 'ADD_COMMENT':
-      return state.map(blog =>
-        blog.id !== action.data.id ? blog : action.data
-      )
-    case 'DELETE_BLOG':
-      return state.filter(blog => blog.id !== action.data.id)
-    case 'CLEAR_BLOGS':
-      return []
-    default:
-      return state
+  case 'INIT_BLOGS':
+    return action.data
+  case 'LIKE':
+    return state.map(blog =>
+      blog.id !== action.data.id ? blog : action.data
+    )
+  case 'SORT':
+    return cloneDeep(state).sort((a,b) => b.likes - a.likes)
+  case 'ADD_BLOG':
+    return [...state, action.data]
+  case 'ADD_COMMENT':
+    return state.map(blog =>
+      blog.id !== action.data.id ? blog : action.data
+    )
+  case 'DELETE_BLOG':
+    return state.filter(blog => blog.id !== action.data.id)
+  case 'CLEAR_BLOGS':
+    return []
+  default:
+    return state
   }
 }
 

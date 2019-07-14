@@ -22,12 +22,12 @@ const NavBarWithNoHistory = (props) => {
 
   return (
     <Menu pointing inverted>
-      <Menu.Item as={Link} to='/' 
+      <Menu.Item as={Link} to='/'
         active={activeItem === 'blogs'}
         onClick={() => setActiveItem('blogs')}>
         Blogs
       </Menu.Item>
-      <Menu.Item as={Link} to='/users' 
+      <Menu.Item as={Link} to='/users'
         active={activeItem === 'users'}
         onClick={() => setActiveItem('users')}>
         Users

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const User = props => {
   const user = props.users.find(user => user.id === props.id)
-  
+
   if (user === undefined) {
     return null
   }

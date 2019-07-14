@@ -34,12 +34,12 @@ export const logout = () => {
 
 const reducer = (state = null, action) => {
   switch(action.type) {
-    case 'INIT_LOGIN_USER':
-      return action.data
-    case 'CLEAR_USER':
-      return null
-    default:
-      return state
+  case 'INIT_LOGIN_USER':
+    return action.data
+  case 'CLEAR_USER':
+    return null
+  default:
+    return state
   }
 }
 

@@ -35,15 +35,15 @@ const LoginFormWithNoHistory = (props) => {
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' textAlign='center'>Log-in to your account</Header>
-        <Form size='large' onSubmit={handleLogin} 
-              data-testid="login-form">
+        <Form size='large' onSubmit={handleLogin}
+          data-testid="login-form">
           <Segment stacked>
             <Form.Input fluid icon='user' iconPosition='left' placeholder='username' name='username'/>
             <Form.Input fluid icon='lock' iconPosition='left' placeholder='password' name='password' type='password'/>
             <Button fluid size='large' type="submit">Login</Button>
           </Segment>
         </Form>
-      </Grid.Column> 
+      </Grid.Column>
     </Grid>
   )
 }

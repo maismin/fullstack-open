@@ -46,5 +46,5 @@ export default {
   create,
   createComment,
   update,
-  remove 
+  remove
 }

@@ -26,12 +26,12 @@ const initialMessage = {
 
 const reducer = (state = initialMessage, action) => {
   switch(action.type) {
-    case 'SET_MESSAGE':
-      return action.data
-    case 'CLEAR_MESSAGE':
-      return initialMessage
-    default:
-      return state
+  case 'SET_MESSAGE':
+    return action.data
+  case 'CLEAR_MESSAGE':
+    return initialMessage
+  default:
+    return state
   }
 }
 
