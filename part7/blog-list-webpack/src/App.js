@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root'
 import React, { useEffect } from 'react'
 import BlogForm from './components/BlogForm'
 import BlogList from './components/BlogList'
@@ -7,7 +8,6 @@ import NavBar from './components/NavBar'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import UserRouter from './components/UserRouter'
-import './App.css'
 import { connect } from 'react-redux'
 import {
   initializeBlogs,
@@ -27,7 +27,7 @@ import {
   Container
 } from 'semantic-ui-react'
 
-const App = (props) => {
+const UnconnectedApp = (props) => {
   useEffect(() => {
     props.initializeLoginUser()
     props.initializeUsers()
@@ -46,7 +46,7 @@ const App = (props) => {
   return (
     <Container>
       <NavBar />
-      <h2>Blog App</h2>
+      <h2>Blogs</h2>
       <Notification />
       <Togglable buttonLabel='new blog'>
         <BlogForm />
@@ -72,7 +72,9 @@ const mapDispatchToProps = {
   initializeUsers
 }
 
-export default connect(
+const App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(UnconnectedApp)
+
+export default hot(App)
