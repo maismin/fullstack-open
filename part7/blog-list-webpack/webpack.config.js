@@ -1,12 +1,11 @@
-const path = require('path')
-const webpack = require("webpack")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackMerge = require('webpack-merge')
 
 const modeConfig = env => require(`./build-utils/webpack.${env}`)(env)
 const presetConfig = require('./build-utils/loadPresets')
 
-const config = ({ mode = "production", presets = [] }) => {
+const config = ({ mode = 'production', presets = [] }) => {
   return webpackMerge(
     {
       mode,
@@ -24,7 +23,7 @@ const config = ({ mode = "production", presets = [] }) => {
           {
             test: /\.jpe?g/,
             use: [
-              { 
+              {
                 loader: 'url-loader',
                 options: {
                   limit: 5000
