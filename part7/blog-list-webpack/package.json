@@ -8,10 +8,14 @@
     "lint": "eslint .",
     "prettier": "prettier \"**/*.+(js|json|css)\"",
     "format": "npm run prettier -- --write",
-    "validate": "npm run lint && npm run prettier -- --list-different",
-    "precommit": "npm run validate"
+    "validate": "npm run lint && npm run prettier -- --list-different"
   },
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/polyfill": "^7.4.4",
@@ -32,6 +36,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.1",
     "jest-dom": "^4.0.0",
+    "lint-staged": "^9.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "prettier": "^1.18.2",
     "react-hot-loader": "^4.12.8",
