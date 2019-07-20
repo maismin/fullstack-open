@@ -7,10 +7,10 @@ const UserRouter = () => {
   return (
     <Switch>
       <Route
-        path='/users/:id'
+        path="/users/:id"
         render={({ match }) => <User id={match.params.id} />}
       />
-      <Route path='/users' component={UserList} />
+      <Route path="/users" component={UserList} />
     </Switch>
   )
 }

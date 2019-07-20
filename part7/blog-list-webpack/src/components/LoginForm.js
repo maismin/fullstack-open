@@ -26,29 +26,29 @@ const LoginFormWithNoHistory = props => {
   }
 
   return (
-    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2' textAlign='center'>
+        <Header as="h2" textAlign="center">
           Log-in to your account
         </Header>
-        <Form size='large' onSubmit={handleLogin} data-testid='login-form'>
+        <Form size="large" onSubmit={handleLogin} data-testid="login-form">
           <Segment stacked>
             <Form.Input
               fluid
-              icon='user'
-              iconPosition='left'
-              placeholder='username'
-              name='username'
+              icon="user"
+              iconPosition="left"
+              placeholder="username"
+              name="username"
             />
             <Form.Input
               fluid
-              icon='lock'
-              iconPosition='left'
-              placeholder='password'
-              name='password'
-              type='password'
+              icon="lock"
+              iconPosition="left"
+              placeholder="password"
+              name="password"
+              type="password"
             />
-            <Button fluid size='large' type='submit'>
+            <Button fluid size="large" type="submit">
               Login
             </Button>
           </Segment>
@@ -68,5 +68,5 @@ const mapDispatchToProps = {
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoginForm)

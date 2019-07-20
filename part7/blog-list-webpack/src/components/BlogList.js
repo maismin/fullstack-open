@@ -6,7 +6,7 @@ const BlogList = props => {
   return (
     <div>
       {props.blogs.map(blog => (
-        <div key={blog.id} className='blogStyle'>
+        <div key={blog.id} className="blogStyle">
           <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
         </div>
       ))}
@@ -24,5 +24,5 @@ const mapDispatchToProps = {}
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(BlogList)

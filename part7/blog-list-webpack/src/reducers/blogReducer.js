@@ -79,7 +79,7 @@ const reducer = (state = [], action) => {
       return action.data
     case 'LIKE':
       return state.map(blog =>
-        blog.id !== action.data.id ? blog : action.data
+        blog.id !== action.data.id ? blog : action.data,
       )
     case 'SORT':
       return cloneDeep(state).sort((a, b) => b.likes - a.likes)
@@ -87,7 +87,7 @@ const reducer = (state = [], action) => {
       return [...state, action.data]
     case 'ADD_COMMENT':
       return state.map(blog =>
-        blog.id !== action.data.id ? blog : action.data
+        blog.id !== action.data.id ? blog : action.data,
       )
     case 'DELETE_BLOG':
       return state.filter(blog => blog.id !== action.data.id)

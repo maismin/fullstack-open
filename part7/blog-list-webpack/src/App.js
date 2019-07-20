@@ -36,12 +36,12 @@ const UnconnectedApp = props => {
       <NavBar />
       <h2>Blogs</h2>
       <Notification />
-      <Togglable buttonLabel='new blog'>
+      <Togglable buttonLabel="new blog">
         <BlogForm />
       </Togglable>
-      <Route exact path='/' render={() => <BlogList />} />
-      <Route path='/blogs' render={() => <BlogRouter />} />
-      <Route path='/users' render={() => <UserRouter />} />
+      <Route exact path="/" render={() => <BlogList />} />
+      <Route path="/blogs" render={() => <BlogRouter />} />
+      <Route path="/users" render={() => <UserRouter />} />
     </Container>
   )
 }
@@ -62,7 +62,7 @@ const mapDispatchToProps = {
 
 const App = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UnconnectedApp)
 
 export default hot(App)

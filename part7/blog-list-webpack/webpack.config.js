@@ -42,7 +42,7 @@ const config = ({ mode = 'production', presets = [] }) => {
       ],
     },
     modeConfig(mode),
-    presetConfig({ mode, presets })
+    presetConfig({ mode, presets }),
   )
 }
 

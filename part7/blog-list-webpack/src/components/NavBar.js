@@ -18,7 +18,7 @@ const NavBarWithNoHistory = props => {
     <Menu pointing inverted>
       <Menu.Item
         as={Link}
-        to='/'
+        to="/"
         active={activeItem === 'blogs'}
         onClick={() => setActiveItem('blogs')}
       >
@@ -26,13 +26,13 @@ const NavBarWithNoHistory = props => {
       </Menu.Item>
       <Menu.Item
         as={Link}
-        to='/users'
+        to="/users"
         active={activeItem === 'users'}
         onClick={() => setActiveItem('users')}
       >
         Users
       </Menu.Item>
-      <Menu.Item position='right'>{props.loginUser.name} logged in</Menu.Item>
+      <Menu.Item position="right">{props.loginUser.name} logged in</Menu.Item>
       <Menu.Item>
         <Button onClick={handleClick}>Logout</Button>
       </Menu.Item>
@@ -55,5 +55,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(NavBar)

@@ -24,32 +24,32 @@ const BlogForm = props => {
     props.setMessage(
       `a new blog '${newBlog.title}' by ${newBlog.author} added`,
       'success',
-      3000
+      3000,
     )
   }
 
   return (
     <div>
       <Divider horizontal></Divider>
-      <Header as='h2'>Create New</Header>
+      <Header as="h2">Create New</Header>
       <Form onSubmit={handleAddBlog}>
         <Form.Input
           fluid
-          placeholder='Title'
-          name='title'
+          placeholder="Title"
+          name="title"
           {...title}
-          reset=''
+          reset=""
         />
         <Form.Input
           fluid
-          placeholder='Author'
-          name='author'
+          placeholder="Author"
+          name="author"
           {...author}
-          reset=''
+          reset=""
         />
-        <Form.Input fluid placeholder='URL' name='url' {...url} reset='' />
+        <Form.Input fluid placeholder="URL" name="url" {...url} reset="" />
 
-        <Button type='submit'>Create</Button>
+        <Button type="submit">Create</Button>
       </Form>
       <Divider horizontal></Divider>
     </div>
@@ -63,5 +63,5 @@ const mapDispatchToProps = {
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(BlogForm)

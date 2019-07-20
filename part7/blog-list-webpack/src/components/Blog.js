@@ -22,7 +22,7 @@ const BlogWithNoHistory = props => {
     props.setMessage(
       `'${blog.title}' by ${blog.author} liked!`,
       'success',
-      3000
+      3000,
     )
     props.sortBlogs()
   }
@@ -30,14 +30,14 @@ const BlogWithNoHistory = props => {
   const handleDelete = blog => {
     try {
       const result = window.confirm(
-        `remove blog '${blog.title}' by ${blog.author}?`
+        `remove blog '${blog.title}' by ${blog.author}?`,
       )
       if (result) {
         props.deleteBlog(blog)
         props.setMessage(
           `'${blog.title}' by ${blog.author} deleted`,
           'success',
-          3000
+          3000,
         )
         props.history.push('/')
       }
@@ -55,17 +55,17 @@ const BlogWithNoHistory = props => {
   return (
     <div>
       <Segment>
-        <Header as='h3'>
+        <Header as="h3">
           {blog.title} {blog.author}
         </Header>
-        <a href={blog.url} target='_blank' rel='noopener noreferrer'>
+        <a href={blog.url} target="_blank" rel="noopener noreferrer">
           {blog.url}
         </a>{' '}
         <br />
         {blog.likes} likes{' '}
         <Button
-          color='blue'
-          icon='thumbs up outline'
+          color="blue"
+          icon="thumbs up outline"
           onClick={() => handleLike(blog)}
         ></Button>{' '}
         <br />
@@ -76,7 +76,7 @@ const BlogWithNoHistory = props => {
       </Segment>
       <Segment>
         <Comment.Group>
-          <Header as='h3' dividing>
+          <Header as="h3" dividing>
             Comments
           </Header>
         </Comment.Group>
@@ -89,13 +89,13 @@ const BlogWithNoHistory = props => {
           </Comment>
         ))}
         <Form reply onSubmit={handleComment}>
-          <Form.TextArea name='comment' />
+          <Form.TextArea name="comment" />
           <Button
-            content='Add Comment'
-            labelPosition='left'
-            icon='edit'
+            content="Add Comment"
+            labelPosition="left"
+            icon="edit"
             primary
-            type='submit'
+            type="submit"
           />
         </Form>
       </Segment>
@@ -122,5 +122,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Blog)

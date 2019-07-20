@@ -7,10 +7,10 @@ const BlogRouter = () => {
   return (
     <Switch>
       <Route
-        path='/blogs/:id'
+        path="/blogs/:id"
         render={({ match }) => <Blog id={match.params.id} />}
       />
-      <Route path='/blogs' component={BlogList} />
+      <Route path="/blogs" component={BlogList} />
     </Switch>
   )
 }
