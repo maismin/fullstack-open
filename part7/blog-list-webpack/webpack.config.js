@@ -14,11 +14,8 @@ const config = ({ mode = 'production', presets = [] }) => {
         rules: [
           {
             test: /\.js$/,
-            loader: 'babel-loader',
+            use: ['babel-loader'],
             exclude: /node_modules/,
-            query: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
           },
           {
             test: /\.jpe?g/,
