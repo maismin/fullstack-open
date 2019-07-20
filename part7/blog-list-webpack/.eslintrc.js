@@ -5,7 +5,11 @@ module.exports = {
     'jest/globals': true,
     node: true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'eslint-config-prettier',
+  ],
   settings: {
     react: {
       version: 'detect',
@@ -22,8 +26,6 @@ module.exports = {
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'never'],
     eqeqeq: 'error',
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
