@@ -13,28 +13,23 @@ const User = props => {
       <h2>{user.name}</h2>
       <h3>added blogs</h3>
       <ul>
-        {
-          user.blogs.map(blog => (
-            <li key={blog.id}>
-              {blog.title}
-            </li>
-          ))
-        }
+        {user.blogs.map(blog => (
+          <li key={blog.id}>{blog.title}</li>
+        ))}
       </ul>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    users: state.users
+    users: state.users,
   }
 }
 
-const mapDispatchToProps = {
-}
+const mapDispatchToProps = {}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (User)
+)(User)

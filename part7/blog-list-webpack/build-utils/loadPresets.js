@@ -1,4 +1,4 @@
-const webpackMerge = require("webpack-merge")
+const webpackMerge = require('webpack-merge')
 
 module.exports = env => {
   const { presets } = env

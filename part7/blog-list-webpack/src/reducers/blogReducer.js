@@ -6,7 +6,7 @@ export const initializeBlogs = () => {
     const blogs = await blogService.getAll()
     dispatch({
       type: 'INIT_BLOGS',
-      data: blogs
+      data: blogs,
     })
     dispatch(sortBlogs())
   }
@@ -18,45 +18,44 @@ export const likeBlog = (id, blog) => {
 
     dispatch({
       type: 'LIKE',
-      data: updatedBlog
+      data: updatedBlog,
     })
   }
 }
 
 export const sortBlogs = () => {
   return {
-    type: 'SORT'
+    type: 'SORT',
   }
 }
 
-export const addBlog = (newBlog) => {
+export const addBlog = newBlog => {
   return async dispatch => {
     const returnedBlog = await blogService.create(newBlog)
 
     dispatch({
       type: 'ADD_BLOG',
-      data: returnedBlog
+      data: returnedBlog,
     })
   }
 }
 
-export const deleteBlog = (blog) => {
+export const deleteBlog = blog => {
   return async dispatch => {
     const response = await blogService.remove(blog.id)
 
     if (response.status === 204) {
       dispatch({
         type: 'DELETE_BLOG',
-        data: blog
+        data: blog,
       })
     }
-
   }
 }
 
 export const clearBlogs = () => {
   return {
-    type: 'CLEAR_BLOGS'
+    type: 'CLEAR_BLOGS',
   }
 }
 
@@ -68,34 +67,34 @@ export const addComment = (blog, comment) => {
       blogWithNewComment.comments.push(response.data.comment)
       dispatch({
         type: 'ADD_COMMENT',
-        data: blogWithNewComment
+        data: blogWithNewComment,
       })
     }
   }
 }
 
 const reducer = (state = [], action) => {
-  switch(action.type) {
-  case 'INIT_BLOGS':
-    return action.data
-  case 'LIKE':
-    return state.map(blog =>
-      blog.id !== action.data.id ? blog : action.data
-    )
-  case 'SORT':
-    return cloneDeep(state).sort((a,b) => b.likes - a.likes)
-  case 'ADD_BLOG':
-    return [...state, action.data]
-  case 'ADD_COMMENT':
-    return state.map(blog =>
-      blog.id !== action.data.id ? blog : action.data
-    )
-  case 'DELETE_BLOG':
-    return state.filter(blog => blog.id !== action.data.id)
-  case 'CLEAR_BLOGS':
-    return []
-  default:
-    return state
+  switch (action.type) {
+    case 'INIT_BLOGS':
+      return action.data
+    case 'LIKE':
+      return state.map(blog =>
+        blog.id !== action.data.id ? blog : action.data
+      )
+    case 'SORT':
+      return cloneDeep(state).sort((a, b) => b.likes - a.likes)
+    case 'ADD_BLOG':
+      return [...state, action.data]
+    case 'ADD_COMMENT':
+      return state.map(blog =>
+        blog.id !== action.data.id ? blog : action.data
+      )
+    case 'DELETE_BLOG':
+      return state.filter(blog => blog.id !== action.data.id)
+    case 'CLEAR_BLOGS':
+      return []
+    default:
+      return state
   }
 }
 

@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const UserList = props => {
   return (
@@ -12,11 +10,15 @@ const UserList = props => {
         <tbody>
           <tr>
             <td></td>
-            <td><strong>blogs created</strong></td>
+            <td>
+              <strong>blogs created</strong>
+            </td>
           </tr>
           {props.users.map(user => (
             <tr key={user.username}>
-              <td><Link to={`/users/${user.id}`}>{user.name}</Link></td>
+              <td>
+                <Link to={`/users/${user.id}`}>{user.name}</Link>
+              </td>
               <td>{user.blogs.length}</td>
             </tr>
           ))}
@@ -26,17 +28,15 @@ const UserList = props => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    users: state.users
+    users: state.users,
   }
 }
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = {}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-) (UserList)
+)(UserList)

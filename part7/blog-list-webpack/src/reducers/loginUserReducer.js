@@ -9,37 +9,34 @@ export const initializeLoginUser = () => {
   }
   return {
     type: 'INIT_LOGIN_USER',
-    data: user
+    data: user,
   }
 }
 
 export const login = user => {
-  window.localStorage.setItem(
-    'loggedBlogappUser', JSON.stringify(user)
-  )
+  window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
   blogService.setToken(user.token)
-  return ({
+  return {
     type: 'INIT_LOGIN_USER',
-    data: user
-  })
+    data: user,
+  }
 }
 
 export const logout = () => {
   window.localStorage.clear()
   return {
-    type: 'CLEAR_USER'
+    type: 'CLEAR_USER',
   }
 }
 
-
 const reducer = (state = null, action) => {
-  switch(action.type) {
-  case 'INIT_LOGIN_USER':
-    return action.data
-  case 'CLEAR_USER':
-    return null
-  default:
-    return state
+  switch (action.type) {
+    case 'INIT_LOGIN_USER':
+      return action.data
+    case 'CLEAR_USER':
+      return null
+    default:
+      return state
   }
 }
 

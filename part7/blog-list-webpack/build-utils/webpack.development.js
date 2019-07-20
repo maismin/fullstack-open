@@ -6,20 +6,20 @@ module.exports = () => ({
     contentBase: path.join(__dirname, 'dist'),
     port: 3000,
     proxy: {
-      '/api': 'http://localhost:3003'
-    }
+      '/api': 'http://localhost:3003',
+    },
   },
   resolve: {
     alias: {
-      'react-dom': '@hot-loader/react-dom'
-    }
+      'react-dom': '@hot-loader/react-dom',
+    },
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
-  }
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 })

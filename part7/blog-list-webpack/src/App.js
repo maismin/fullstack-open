@@ -9,25 +9,13 @@ import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 import UserRouter from './components/UserRouter'
 import { connect } from 'react-redux'
-import {
-  initializeBlogs,
-  clearBlogs
-} from './reducers/blogReducer'
-import {
-  initializeLoginUser,
-  logout
-} from './reducers/loginUserReducer'
-import {
-  initializeUsers
-} from './reducers/userReducer'
-import {
-  Route
-} from 'react-router-dom'
-import {
-  Container
-} from 'semantic-ui-react'
+import { initializeBlogs, clearBlogs } from './reducers/blogReducer'
+import { initializeLoginUser, logout } from './reducers/loginUserReducer'
+import { initializeUsers } from './reducers/userReducer'
+import { Route } from 'react-router-dom'
+import { Container } from 'semantic-ui-react'
 
-const UnconnectedApp = (props) => {
+const UnconnectedApp = props => {
   useEffect(() => {
     props.initializeLoginUser()
     props.initializeUsers()
@@ -58,9 +46,9 @@ const UnconnectedApp = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    loginUser: state.loginUser
+    loginUser: state.loginUser,
   }
 }
 
@@ -69,7 +57,7 @@ const mapDispatchToProps = {
   clearBlogs,
   initializeLoginUser,
   logout,
-  initializeUsers
+  initializeUsers,
 }
 
 const App = connect(

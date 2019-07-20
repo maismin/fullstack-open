@@ -13,5 +13,5 @@ const getUser = async id => {
 
 export default {
   getAll,
-  getUser
+  getUser,
 }

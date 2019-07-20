@@ -26,20 +26,20 @@ const config = ({ mode = 'production', presets = [] }) => {
               {
                 loader: 'url-loader',
                 options: {
-                  limit: 5000
-                }
-              }
-            ]
-          }
-        ]
+                  limit: 5000,
+                },
+              },
+            ],
+          },
+        ],
       },
       plugins: [
         new HtmlWebpackPlugin({
           title: 'Blog List',
-          template: 'public/index.html'
+          template: 'public/index.html',
         }),
-        new webpack.ProgressPlugin()
-      ]
+        new webpack.ProgressPlugin(),
+      ],
     },
     modeConfig(mode),
     presetConfig({ mode, presets })

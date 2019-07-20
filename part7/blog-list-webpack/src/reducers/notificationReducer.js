@@ -4,8 +4,8 @@ export const setMessage = (message, messageType, time) => {
       type: 'SET_MESSAGE',
       data: {
         type: messageType,
-        message: message
-      }
+        message: message,
+      },
     })
     setTimeout(() => {
       dispatch(clearMessage())
@@ -15,23 +15,23 @@ export const setMessage = (message, messageType, time) => {
 
 export const clearMessage = () => {
   return {
-    type: 'CLEAR_MESSAGE'
+    type: 'CLEAR_MESSAGE',
   }
 }
 
 const initialMessage = {
   type: '.success',
-  message: null
+  message: null,
 }
 
 const reducer = (state = initialMessage, action) => {
-  switch(action.type) {
-  case 'SET_MESSAGE':
-    return action.data
-  case 'CLEAR_MESSAGE':
-    return initialMessage
-  default:
-    return state
+  switch (action.type) {
+    case 'SET_MESSAGE':
+      return action.data
+    case 'CLEAR_MESSAGE':
+      return initialMessage
+    default:
+      return state
   }
 }
 
