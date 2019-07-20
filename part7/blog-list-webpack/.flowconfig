@@ -1,0 +1,14 @@
+[ignore]
+.*/build/.*
+.*/dist/.*
+.*/src/components/.*
+.*/nod_modules/.*
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
