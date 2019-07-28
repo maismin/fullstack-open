@@ -6,6 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "watch": "NODE_ENV=development nodemon index.js",
+    "watch:test": "NODE_ENV=test nodemon index.js",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --verbose --runInBand"
   },
