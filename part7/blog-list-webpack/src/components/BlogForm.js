@@ -39,6 +39,7 @@ const BlogForm = props => {
           name="title"
           {...title}
           reset=""
+          data-cy="blog-form-title"
         />
         <Form.Input
           fluid
@@ -46,10 +47,20 @@ const BlogForm = props => {
           name="author"
           {...author}
           reset=""
+          data-cy="blog-form-author"
         />
-        <Form.Input fluid placeholder="URL" name="url" {...url} reset="" />
+        <Form.Input
+          fluid
+          placeholder="URL"
+          name="url"
+          {...url}
+          reset=""
+          data-cy="blog-form-url"
+        />
 
-        <Button type="submit">Create</Button>
+        <Button type="submit" data-cy="blog-form-submit">
+          Create
+        </Button>
       </Form>
       <Divider horizontal></Divider>
     </div>

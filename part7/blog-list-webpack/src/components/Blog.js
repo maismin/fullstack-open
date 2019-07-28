@@ -62,11 +62,12 @@ const BlogWithNoHistory = props => {
           {blog.url}
         </a>{' '}
         <br />
-        {blog.likes} likes{' '}
+        <span data-cy="likes">{blog.likes}</span> likes{' '}
         <Button
           color="blue"
           icon="thumbs up outline"
           onClick={() => handleLike(blog)}
+          data-cy="like-button"
         ></Button>{' '}
         <br />
         added by {blog.user.name} <br />
@@ -96,6 +97,7 @@ const BlogWithNoHistory = props => {
             icon="edit"
             primary
             type="submit"
+            data-cy="comment-submit-button"
           />
         </Form>
       </Segment>

@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = () => ({
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 3000,

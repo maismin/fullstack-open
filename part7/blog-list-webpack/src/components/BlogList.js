@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const BlogList = props => {
   return (
-    <div>
+    <div data-cy="blog-list">
       {props.blogs.map(blog => (
         <div key={blog.id} className="blogStyle">
           <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>

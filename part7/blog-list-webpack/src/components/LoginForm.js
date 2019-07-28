@@ -21,7 +21,7 @@ const LoginFormWithNoHistory = props => {
       props.initializeBlogs()
       props.history.push('/')
     } catch (exception) {
-      props.setMessage('wrong username or password', 'error', 3000)
+      props.setMessage('wrong username or password', 'error')
     }
   }
 
@@ -39,6 +39,7 @@ const LoginFormWithNoHistory = props => {
               iconPosition="left"
               placeholder="username"
               name="username"
+              data-cy="username"
             />
             <Form.Input
               fluid
@@ -47,8 +48,9 @@ const LoginFormWithNoHistory = props => {
               placeholder="password"
               name="password"
               type="password"
+              data-cy="password"
             />
-            <Button fluid size="large" type="submit">
+            <Button fluid size="large" type="submit" data-cy="login-button">
               Login
             </Button>
           </Segment>

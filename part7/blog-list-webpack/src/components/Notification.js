@@ -7,7 +7,9 @@ const Notification = props => {
   }
 
   return (
-    <div className={props.notification.type}>{props.notification.message}</div>
+    <div className={props.notification.type} data-cy="notification-message">
+      {props.notification.message}
+    </div>
   )
 }
 

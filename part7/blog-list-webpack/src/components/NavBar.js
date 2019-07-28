@@ -32,7 +32,9 @@ const NavBarWithNoHistory = props => {
       >
         Users
       </Menu.Item>
-      <Menu.Item position="right">{props.loginUser.name} logged in</Menu.Item>
+      <Menu.Item position="right" data-cy="user-name-display">
+        {props.loginUser.name} logged in
+      </Menu.Item>
       <Menu.Item>
         <Button onClick={handleClick}>Logout</Button>
       </Menu.Item>
